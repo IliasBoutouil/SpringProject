@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html 
+	xmlns:th="http://www.thymeleaf.com"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="master">
+	<head>
+		<meta charset="UTF-8">
+		<title>Bricoleur.ma</title>
+	</head>
+	<body >
+		<div layout:fragment="contenu" class="container mt-2  p-5">
+		
+		
+		<h5 class="m-2">Recherche rapide :</h5>
+		 <h6 class="m-2 text-muted">Effectuez une recherche selon les critères suivants</h6>
+		<form class="row row-cols-lg-auto g-3 align-items-center">
+  <div class="col-sm-3">
+    <input type="text" class="form-control" name="titre" placeholder="Titre"> 
+  </div>
+    <div class="col-sm-3">
+    <input type="text" class="form-control" name="desc" placeholder="Description"> 
+  </div>
+    <div class="col-sm-3">
+    <input type="text" class="form-control" name="service" placeholder="Spécialité"> 
+  </div>
+ 
+  <div class="col-12">
+    <button type="submit" class="btn btn-primary">Rechercher</button>
+  </div>
+</form>
+ <h6 class="m-2 text-muted"><span th:text="${missions.getTotalElements}" ></span> missions trouvées</h6>
+		<a class="btn btn-success my-4" href="/missions/create">Créer nouveau</a> 
+	
+		
+		 <div class="row">
+		 <div th:each="m : ${missions}" class="col-3">
+		 <div class="card my-2" style="width: 18rem;height: 16rem;">
+		  <div class="card-body">
+		    <h5 class="card-title fw-bold text-primary" th:text="${m.titre}" > </h5>
+		    <h6 class="card-subtitle mb-2 text-muted " th:text="${m.service.libelle}"></h6>
+		    <p class="card-text text-secondary" th:text='${(m.description.substring(0, 50))+"..."}'></p>
+		     <a th:href="@{/missions/{id} (id=${m.id})}" class="card-link">Voir plus</a>
+		  </div>
+			</div>
+		 </div>
+		
+		 </div>
+ <div class="mx-auto pt-5" style="width: 200px;">
+ 
+ 		 <nav aria-label="..." >
+  <ul class="pagination pagination-sm">
+   <li th:each="p,s:${listePage}" th:class="${s.index == currentPage}? 'page-item active' : 'page-item' ">
+      <a th:text="${s.count}" 
+		    		class="page-link" 
+		    		th:href="@{missions(page= ${s.index}, title=${title},desc=${desc},service=${service})}"></a>
+    </li>
+  </ul>
+</nav>
+</div>
+	 </div>
+	</body>
+</html>

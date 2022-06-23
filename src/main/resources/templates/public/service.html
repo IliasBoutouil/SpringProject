@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html 
+	xmlns:th="http://www.thymeleaf.com"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="master">
+	<head>
+		<meta charset="UTF-8">
+		<title>Bricoleur.ma</title>
+	</head>
+	<body >
+		<div layout:fragment="contenu" class="mt-2 p-5">
+		 <h1 class="text-center mb-5">Nos services</h1>
+		 <div class="row ">
+		 <div th:each="s : ${services}" class="col-2">
+		 <div class="card my-2" style="width: 13rem;">
+		  <div class="card-body">
+		   
+		    <h6 class="card-title fw-bold text-primary text-center text-capitalize" > <a class="stretched-link text-decoration-none mr-2" th:href="@{missions(service=${s.libelle})}" style="cursor:pointer" th:text="${s.libelle}" ></a>     <span class="badge bg-primary rounded-pill" th:text="${s.missions.size}">14</span>
+		    </h6>
+		 
+		  </div>
+			</div>
+		 </div>
+		
+		 </div>
+		 </div>
+
+
+	</body>
+</html>
