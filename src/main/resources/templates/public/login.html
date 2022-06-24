@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html 
+	xmlns:th="http://www.thymeleaf.com"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="master">
+	<head>
+		<meta charset="UTF-8">
+		<title>Bricoleur.ma</title>
+	</head>
+	<body >
+		<div layout:fragment="contenu" class="mt-2 p-5">
+		 <div class="container w-25 mx-auto shadow p-5">
+      <form class="form-signin" method="post" th:action="@{login}">
+        <h2 class="form-signin-heading text-center mb-5">Please sign in</h2>
+        <p>
+          <input type="email" id="username" name="username" class="form-control" placeholder="email" required autofocus>
+        </p>
+        <p>
+          <input type="password" id="password" name="password" class="form-control" placeholder="Password" required>
+        </p>
+        <button class="btn btn-primary btn-block" type="submit">Sign in</button>
+      </form>
+</div>
+		 </div>
+
+
+	</body>
+</html>

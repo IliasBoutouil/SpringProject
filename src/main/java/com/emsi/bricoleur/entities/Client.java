@@ -18,4 +18,5 @@ import lombok.NoArgsConstructor;
 public class Client extends User {
 	@OneToMany(mappedBy = "propriotaire")
 	private List<Mission> missions = new  ArrayList<Mission>();
+	private String role="client";
 }

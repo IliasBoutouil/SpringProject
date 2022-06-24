@@ -10,14 +10,14 @@
 	<body >
 		<div layout:fragment="contenu" class="mt-2 p-5">
 		 <h1 class="mt-5">Dernières missions publiées</h1>
-		 <a class="btn btn-success my-4" href="/missions/create">Créer nouveau</a> 
+		 <a class="btn btn-success my-4" sec:authorize="hasAuthority('client')" href="/missions/create">Créer nouveau</a> 
 		 <div class="row ">
 		 <div th:each="m : ${missions}" class="col-3">
-		 <div class="card my-2" style="width: 18rem;height: 16rem;">
+		 <div class="card my-2" style="width: 18rem;height: 13rem;">
 		  <div class="card-body">
 		    <h5 class="card-title fw-bold text-primary" th:text="${m.titre}" > </h5>
 		    <h6 class="card-subtitle mb-2 text-muted " th:text="${m.service.libelle}"></h6>
-		    <p class="card-text text-secondary" th:text='${(m.description.substring(0, 50))+"..."}'></p>
+		    <h6 class="mb-2 text-muted" th:text="'Publié le : ' + ${m.createdOn.toString().substring(0, 10)}" ></h6>
 		    <a th:href="@{/missions/{id} (id=${m.id})}" class="card-link">Voir plus</a>
 		  </div>
 			</div>

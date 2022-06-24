@@ -12,18 +12,26 @@
 	<body >
 		<div layout:fragment="contenu" class="container mt-2 pt-2 w-75">
 		 <h3 class="text-capitalize "th:text="${mission.titre}"></h3>
-		 <h5> <a class="text-decoration-none " href="#" th:text="${mission.service.libelle}"></a></h5>
-		 <h6 class="mb-2 text-muted" th:text="'Publié le : ' + ${mission.createdOn.toString().substring(0, 16)}" ></h6>
+		 <h5> <a class="text-decoration-none " th:href="@{/missions(service=${mission.service.libelle})}" th:text="${mission.service.libelle}"></a></h5>
+		  <h6 class="mb-2 text-muted" th:text="'Propriotaire : ' + ${mission.propriotaire.nom}" ></h6>
+		 <h6 class="mb-2 text-muted" th:text="'Publié le : ' + ${mission.createdOn.toString().substring(0, 10)}" ></h6>
 		 <h6>Description : </h6>
 	     <p class="" th:text=" ${mission.description}"></p>
 		
 		<ul class="list-group list-group-flush w-25">
-<li class="list-group-item fw-bold"  >Date début : <span class="fw-normal" th:text=" ${mission.dateDebut}"></span></li>
+    <li class="list-group-item fw-bold"  >Date début : <span class="fw-normal" th:text=" ${mission.dateDebut}"></span></li>
 	<li class="list-group-item fw-bold" >Date fin : <span class="fw-normal" th:text="${mission.dateFin}" ></span></li>
 	<li class="list-group-item fw-bold"  >Nombre jours : <span class="fw-normal" th:text=" ${mission.jours}"></span></li>
 	<li class="list-group-item fw-bold"  >Budget : <span class="fw-normal" th:text="${mission.budget}+'dhs'" ></span></li>
 </ul>
-<div class="row float-end"> <div class="col"> <button class="btn btn-success  m-2">Contacter le propriotaire</button><a class="btn btn-primary m-2 "  th:href="@{/missions/edit/{id} (id=${mission.id})}" >Modifier</a> <a th:href="@{/missions/delete/{id} (id=${mission.id})}"  onclick="return confirm('Supprimer?');" class="btn btn-danger m-2">Supprimer</a></div> </div>
+<div class="row float-end"> <div class="col"> 
+<button class="btn btn-success  m-2" sec:authorize="hasAuthority('bricoleur')">Contacter le propriotaire</button>
+<div sec:authorize="isAuthenticated()">
+<div th:if="${#authentication.getPrincipal.getUsername().equals(mission.propriotaire.email)}">
+<a class="btn btn-primary m-2 "  th:href="@{/missions/edit/{id} (id=${mission.id})}" >Modifier</a>
+ <a th:href="@{/missions/delete/{id} (id=${mission.id})}"  onclick="return confirm('Supprimer?');" class="btn btn-danger m-2">Supprimer</a></div> </div>
+</div>
+</div>
 
 		 </div>
 

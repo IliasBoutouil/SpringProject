@@ -21,7 +21,6 @@ public class Service {
 	private int id;
 	@Column(length = 50,nullable = false,unique=true)	
 	private String libelle;
-	private String icon;
 	@OneToMany(mappedBy = "service")
 	private List<Mission> missions = new  ArrayList<Mission>();
 }

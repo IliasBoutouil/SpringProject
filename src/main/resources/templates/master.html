@@ -20,7 +20,7 @@
 <body>
 	<nav class="navbar navbar-expand-lg bg-light">
   <div class="container-fluid">
-    <a class="navbar-brand text-uppercase font-monospace" href="/"><i class="fa-solid fa-toolbox"></i> Bricoleur.ma</a>
+    <a class="navbar-brand text-uppercase font-monospace fw-semibold" href="/"><i class="fa-solid fa-toolbox"></i> Bricoleur.ma</a>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
@@ -36,14 +36,23 @@
           <a class="nav-link" href="/services"><i class="fa-solid fa-screwdriver-wrench"></i> Services</a>
         </li>
       </ul>
-     <ul class="navbar-nav  mb-2 mb-lg-0">
+      <div >
+
+     <ul sec:authorize="isAnonymous()"  class="navbar-nav  mb-2 mb-lg-0">
         <li class="nav-item">
-          <a class="nav-link "  href="#"><i class="fa-solid fa-lock"></i> S'authentifier</a>
+          <a class="nav-link "  href="/login"><i class="fa-solid fa-lock"></i> S'authentifier</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="#"><i class="fa-solid fa-user-plus"></i> S'inscrire</a>
+          <a class="nav-link" href="/register"><i class="fa-solid fa-user-plus"></i> S'inscrire</a>
         </li>
-        
+      </ul>
+       <ul sec:authorize="isAuthenticated()"  class="navbar-nav  mb-2 mb-lg-0">
+        <li class="nav-item">
+          <a class="nav-link" href="#"> <i sec:authorize="hasAuthority('client')" class="fa-solid fa-user"></i><i sec:authorize="hasAuthority('bricoleur')" class="fa-solid fa-screwdriver-wrench"></i> <span sec:authentication="name" ></span></a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" th:href="@{/logout}"><i class="fa-solid fa-arrow-right-from-bracket "></i></a>
+        </li>
       </ul>
     </div>
   </div>

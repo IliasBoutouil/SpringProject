@@ -13,8 +13,9 @@ import lombok.NoArgsConstructor;
 @DiscriminatorValue("Bricoleur")
 @Data @AllArgsConstructor @NoArgsConstructor @EqualsAndHashCode(callSuper=false)
 public class Bricoleur extends User {
-@Column(length = 25,nullable = false)
+@Column(length = 25,nullable = true)
 private String specialite;
-private boolean isDispo=true;
+private boolean disponible=true;
+private String role="bricoleur";
 }
  

@@ -14,10 +14,10 @@ import com.emsi.bricoleur.entities.Mission;
 
 public interface MissionRepository extends JpaRepository<Mission, Integer> {
 
-	List<Mission> findTop4ByOrderByCreatedOn();
-	Page<Mission> findByTitreContainsAndDescriptionContainsAndServiceLibelleContains(String titre,String desc,String service,Pageable p);
+	List<Mission> findTop4ByOrderByCreatedOnDesc();
+	Page<Mission> findByTitreContainsAndDescriptionContainsAndServiceLibelleContainsOrderByCreatedOnDesc(String titre,String desc,String service,Pageable p);
 	default Page<Mission> Search(String titre,String desc,String service,Pageable p)
 	{
-		return findByTitreContainsAndDescriptionContainsAndServiceLibelleContains(titre,desc,service,p);
+		return findByTitreContainsAndDescriptionContainsAndServiceLibelleContainsOrderByCreatedOnDesc(titre,desc,service,p);
 	}
 }

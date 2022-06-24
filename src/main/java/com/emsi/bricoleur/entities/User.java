@@ -7,6 +7,7 @@ import javax.persistence.*;
 import javax.validation.constraints.Email;
 
 import org.hibernate.annotations.CreationTimestamp;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import lombok.*;
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
@@ -22,6 +23,7 @@ private String prenom;
 @Column(length = 250,nullable = false)
 private String adresse;
 @Temporal(TemporalType.DATE) 
+@DateTimeFormat(pattern = "yyyy-MM-dd")
 private Date date_naissance;
 @Column(unique = true,nullable = false)
 @Email
@@ -30,10 +32,10 @@ private String email;
 private String password;
 @Column(nullable = false)
 private String phone;
-private String role="user";
 @Column(name = "created_on")
 @CreationTimestamp
 private Date createdOn;
+private boolean active=false;
 
 
 }
